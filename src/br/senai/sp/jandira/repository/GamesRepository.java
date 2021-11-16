@@ -14,12 +14,13 @@ public class GamesRepository {
 		colecaoGames = new Jogo[quatidadeDeJogos];
 	}
 	public void gravarJogo(Jogo jogo, int posicao) {
-		colecaoGames = new Jogo[posicao];
+		colecaoGames[posicao] = jogo;
 	}
-	public Jogo listarJogos(int posicao) {
+	public Jogo listarJogo(int posicao) {
 		return colecaoGames[posicao];
 	}
 	public Jogo[] listatTodosJogos() {
 		return colecaoGames;
 	}
+	
 }

@@ -6,7 +6,7 @@ public class Jogo {
 	private Fabricante fabricante;
 	private boolean zerado;
 	private Consoles console;
-	private double decimal;
+	private double valor;
 	private String observacoes;
 
 	public String getTitulo() {
@@ -42,11 +42,11 @@ public class Jogo {
 	}
 
 	public double getDecimal() {
-		return decimal;
+		return valor;
 	}
 
-	public void setDecimal(double decimal) {
-		this.decimal = decimal;
+	public void setDecimal(double valor) {
+		this.valor = valor;
 	}
 
 	public String getObservacoes() {
