@@ -7,7 +7,7 @@ public class GamesRepository {
 	private Jogo[] colecaoGames;
 
 	public GamesRepository() {
-		colecaoGames = new Jogo[32];
+		colecaoGames = new Jogo[3];
 	}
 
 	public GamesRepository(int quatidadeDeJogos) {
