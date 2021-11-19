@@ -1,14 +1,6 @@
 package br.senai.sp.jandira;
 
-import br.senai.sp.jandira.model.Consoles;
-import br.senai.sp.jandira.model.Fabricante;
-import br.senai.sp.jandira.model.Jogo;
-import br.senai.sp.jandira.repository.FabricanteRepository;
-import br.senai.sp.jandira.repository.GamesRepository;
-import br.senai.sp.jandira.ui.FrameFabricante;
-//import br.senai.sp.jandira.model.Fabricante;
-//import br.senai.sp.jandira.model.Jogo;
-//import br.senai.sp.jandira.repository.GamesRepository;
+
 import br.senai.sp.jandira.ui.FrameGames;
 
 public class App {
@@ -44,7 +36,9 @@ public class App {
 //	    for(Jogo jogo : colecaoGames.listatTodosJogos()) {
 //	    	System.out.println(jogo.getTitulo());
 //	    }
+//       FrameFabricante f = new FrameFabricante();
    
+       
+      
 	}
-
 }

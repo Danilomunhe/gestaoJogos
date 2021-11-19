@@ -24,7 +24,6 @@ public class Jogo {
 	public void setFabricante(Fabricante fabricante) {
 		this.fabricante = fabricante;
 	}
-
 	public boolean isZerado() {
 		return zerado;
 	}

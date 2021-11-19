@@ -1,8 +1,5 @@
 package br.senai.sp.jandira.ui;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,6 +8,7 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 
@@ -23,6 +21,8 @@ import br.senai.sp.jandira.repository.GamesRepository;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
@@ -33,7 +33,7 @@ import javax.swing.JButton;
 public class FrameGames extends JFrame {
 
 	private JPanel contentPane;
-	private JPanel contentPane2;
+
 	private JTextField txtTitulo;
 	private JTextField txtValor;
 	private JTextField txtObservacoes;
@@ -41,43 +41,43 @@ public class FrameGames extends JFrame {
 
 	public FrameGames() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 684, 468);
+		setBounds(100, 100, 825, 516);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.LIGHT_GRAY);
+		contentPane.setBackground(Color.CYAN);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
 		JLabel lblTitulo = new JLabel("T\u00EDtulo do jogo:");
 		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblTitulo.setBounds(10, 45, 95, 14);
+		lblTitulo.setBounds(10, 78, 95, 14);
 		contentPane.add(lblTitulo);
 
 		JLabel lblFabricante = new JLabel("Fabricante:");
 		lblFabricante.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblFabricante.setBounds(10, 70, 69, 14);
+		lblFabricante.setBounds(10, 103, 69, 14);
 		contentPane.add(lblFabricante);
 
-		FabricanteRepository listaFabricantes = new FabricanteRepository();
 		JComboBox comboFabricante = new JComboBox();
-		DefaultListModel<String> modelFabricante = new DefaultListModel<String>();
-          
-		for(Fabricante fa : listaFabricantes.listarTodosFabricantes()) {
-			modelFabricante.addElement(fa.getNome());
+		DefaultComboBoxModel<String> modelFabricante = new DefaultComboBoxModel<String>();
+
+		FabricanteRepository fabricantes = new FabricanteRepository();
+		for (Fabricante f : fabricantes.listarTodosFabricantes()) {
+			modelFabricante.addElement(f.getNome());
 		}
-
-
-		comboFabricante.setBounds(76, 67, 148, 23);
+		
+		comboFabricante.setModel(modelFabricante);
+		comboFabricante.setBounds(87, 100, 148, 23);
 		contentPane.add(comboFabricante);
 
 		JCheckBox checkBoxZerado = new JCheckBox("");
 		checkBoxZerado.setForeground(new Color(0, 255, 153));
-		checkBoxZerado.setBounds(52, 101, 39, 23);
+		checkBoxZerado.setBounds(66, 128, 39, 23);
 		contentPane.add(checkBoxZerado);
 
 		JLabel lblZerado = new JLabel("Zerado:");
 		lblZerado.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblZerado.setBounds(10, 106, 46, 14);
+		lblZerado.setBounds(10, 128, 46, 14);
 		contentPane.add(lblZerado);
 
 		JComboBox comboBoxConsoles = new JComboBox();
@@ -88,46 +88,46 @@ public class FrameGames extends JFrame {
 		}
 
 		comboBoxConsoles.setModel(modelConsoles);
-		comboBoxConsoles.setBounds(72, 128, 112, 22);
+		comboBoxConsoles.setBounds(76, 158, 112, 22);
 		contentPane.add(comboBoxConsoles);
 
 		JLabel lblConsoles = new JLabel("Consoles:");
 		lblConsoles.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblConsoles.setBounds(10, 131, 69, 14);
+		lblConsoles.setBounds(10, 161, 69, 14);
 		contentPane.add(lblConsoles);
 
 		JLabel lblValor = new JLabel("Valor estimado:");
 		lblValor.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblValor.setBounds(10, 156, 95, 14);
+		lblValor.setBounds(10, 196, 95, 14);
 		contentPane.add(lblValor);
 
 		JLabel lblObservacoes = new JLabel("Observa\u00E7\u00F5es:");
 		lblObservacoes.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblObservacoes.setBounds(10, 193, 81, 14);
+		lblObservacoes.setBounds(10, 252, 81, 14);
 		contentPane.add(lblObservacoes);
 
 		JLabel lblMeusJogos = new JLabel("Meus Jogos:");
 		lblMeusJogos.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblMeusJogos.setBounds(323, 30, 69, 14);
+		lblMeusJogos.setBounds(344, 78, 69, 14);
 		contentPane.add(lblMeusJogos);
 
 		txtTitulo = new JTextField();
-		txtTitulo.setBounds(98, 43, 112, 20);
+		txtTitulo.setBounds(99, 76, 112, 20);
 		contentPane.add(txtTitulo);
 		txtTitulo.setColumns(10);
 
 		txtValor = new JTextField();
-		txtValor.setBounds(98, 154, 86, 20);
+		txtValor.setBounds(98, 194, 86, 20);
 		contentPane.add(txtValor);
 		txtValor.setColumns(10);
 
 		txtObservacoes = new JTextField();
-		txtObservacoes.setBounds(98, 191, 148, 117);
+		txtObservacoes.setBounds(87, 233, 148, 117);
 		contentPane.add(txtObservacoes);
 		txtObservacoes.setColumns(10);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(322, 55, 138, 264);
+		scrollPane.setBounds(342, 102, 138, 264);
 		contentPane.add(scrollPane);
 
 		JList list = new JList();
@@ -137,30 +137,30 @@ public class FrameGames extends JFrame {
 
 		JButton btnSalvar = new JButton("Salvar jogo");
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnSalvar.setForeground(Color.BLUE);
-		btnSalvar.setBackground(Color.CYAN);
-		btnSalvar.setBounds(10, 344, 124, 40);
+		btnSalvar.setForeground(Color.WHITE);
+		btnSalvar.setBackground(Color.BLUE);
+		btnSalvar.setBounds(73, 377, 124, 40);
 		contentPane.add(btnSalvar);
 
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(320, 339, 89, 23);
+		btnVoltar.setForeground(Color.WHITE);
+		btnVoltar.setBackground(Color.BLUE);
+		btnVoltar.setBounds(324, 387, 89, 23);
 		contentPane.add(btnVoltar);
 
 		JButton btnAvancar = new JButton("Avan\u00E7ar");
-		btnAvancar.setBounds(426, 339, 89, 23);
+		btnAvancar.setForeground(Color.WHITE);
+		btnAvancar.setBackground(Color.BLUE);
+		btnAvancar.setBounds(429, 387, 89, 23);
 		contentPane.add(btnAvancar);
-
-		JButton btnAdicionarFabricante = new JButton("Adiconar Fabricante");
-		btnAdicionarFabricante.setBackground(Color.CYAN);
-		btnAdicionarFabricante.setBounds(146, 344, 138, 40);
-		contentPane.add(btnAdicionarFabricante);
-
-		JPanel panel = new JPanel();
-		panel.setBounds(0, 0, 668, 429);
-		contentPane.add(panel);
-		panel.setLayout(null);
+		
+		JLabel lblControleDeJogos = new JLabel("Controle de jogos");
+		lblControleDeJogos.setFont(new Font("Tahoma", Font.BOLD, 22));
+		lblControleDeJogos.setBounds(293, 26, 207, 41);
+		contentPane.add(lblControleDeJogos);
 
 		setVisible(true);
+
 
 		GamesRepository colecaoJogos = new GamesRepository();
 
@@ -170,8 +170,9 @@ public class FrameGames extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Criando o objeto jogo e guardando no repositório
 				Jogo jogo = new Jogo();
-
+                
 				jogo.setTitulo(txtTitulo.getText());
+				jogo.setFabricante(fabricantes.listarFabricante(comboFabricante.getSelectedIndex()));
 				jogo.setZerado(checkBoxZerado.isSelected());
 				jogo.setObservacoes(txtObservacoes.getText());
 				jogo.setDecimal(Double.parseDouble(txtValor.getText()));
@@ -179,14 +180,13 @@ public class FrameGames extends JFrame {
 
 				colecaoJogos.gravarJogo(jogo, posicao);
 				posicao++;
-				System.out.println(colecaoJogos.listarJogo(0).getTitulo());
+
+				System.out.println(jogo.getFabricante());
 
 				// Adiconando um elemento na lista
 				listJogos.addElement(jogo.getTitulo());
 			}
 		});
-
-
 		list.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -197,11 +197,32 @@ public class FrameGames extends JFrame {
 				txtObservacoes.setText(jogo.getObservacoes());
 				checkBoxZerado.setSelected(jogo.isZerado());
 				comboBoxConsoles.setSelectedIndex(jogo.getConsole().ordinal());
-
+				comboFabricante.setSelectedIndex(Arrays.asList(fabricantes.listarTodosFabricantes()).indexOf(jogo.getFabricante()));
 			}
 		});
 
+		btnAvancar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int valorDaLista = list.getSelectedIndex();
+				list.setSelectedIndex(valorDaLista + 1);
+				
+			}
+		});
+		
+		btnVoltar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				int valorDaLista = list.getSelectedIndex();
+				list.setSelectedIndex(valorDaLista - 1);
+				
+			}
+		});
 	}
+	
+	
 
 	private Consoles determinarConsole(int consoleSeleiconado) {
 		if (consoleSeleiconado == 0) {
@@ -213,5 +234,7 @@ public class FrameGames extends JFrame {
 		} else {
 			return Consoles.XBOXSERIESX;
 		}
+
 	}
+
 }

@@ -6,6 +6,12 @@ public class Fabricante {
 	private String anoDeFundacao;
 	private String fundador;
 
+	public Fabricante(String nome, String anoDeFundacao, String fundador) {
+		this.nome = nome;
+		this.anoDeFundacao = anoDeFundacao;
+		this.fundador = fundador;
+	}
+	
 	public String getNome() {
 		return nome;
 	}

@@ -8,10 +8,9 @@ public class FabricanteRepository {
 	
 	public FabricanteRepository() {
 		fabricantes = new Fabricante[3];
-		
-		fabricantes[0].setNome("Activison");
-		fabricantes[1].setNome("Sony");
-		fabricantes[2].setNome("Ea");
+		fabricantes[0] = new Fabricante("Activison", "28/02/2003", "Adam");
+		fabricantes[1] = new Fabricante("Warner Games", "28/02/2003", "Adam");
+		fabricantes[2] = new Fabricante("Ea Sports", "28/02/2003", "Adam");
 	}
 	public FabricanteRepository(int quantidadeFabricantes) {
 		fabricantes = new Fabricante[quantidadeFabricantes];
