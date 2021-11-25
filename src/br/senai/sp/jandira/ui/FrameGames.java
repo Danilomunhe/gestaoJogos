@@ -141,7 +141,7 @@ public class FrameGames extends JFrame {
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 12));
 		btnSalvar.setForeground(Color.DARK_GRAY);
 		btnSalvar.setBackground(Color.GREEN);
-		btnSalvar.setBounds(73, 377, 124, 40);
+		btnSalvar.setBounds(10, 377, 124, 40);
 		contentPane.add(btnSalvar);
 
 		JButton btnVoltar = new JButton("Voltar");
@@ -162,11 +162,24 @@ public class FrameGames extends JFrame {
 		lblControleDeJogos.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblControleDeJogos.setBounds(293, 26, 207, 41);
 		contentPane.add(lblControleDeJogos);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnLimpar.setForeground(Color.DARK_GRAY);
+		btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 12));
+		btnLimpar.setBackground(Color.GREEN);
+		btnLimpar.setBounds(147, 377, 124, 40);
+		contentPane.add(btnLimpar);
 
 		setVisible(true);
 
 		GamesRepository colecaoJogos = new GamesRepository();
 
+		
+		
 		btnSalvar.addActionListener(new ActionListener() {
 
 			@Override
@@ -195,10 +208,25 @@ public class FrameGames extends JFrame {
 					btnSalvar.setEnabled(false);
 					btnSalvar.setBackground(Color.RED);
 					JOptionPane.showMessageDialog(null, "A coleção está cheia", "Cheia", JOptionPane.WARNING_MESSAGE);
-
 				}
+				
 			}
 		});
+		
+		btnLimpar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				txtTitulo.setText("");
+				txtValor.setText("");
+				txtObservacoes.setText("");
+				checkBoxZerado.setSelected(false);
+			}
+		});
+		  
+
+		
 		list.addListSelectionListener(new ListSelectionListener() {
 
 			@Override
@@ -250,7 +278,5 @@ public class FrameGames extends JFrame {
 		} else {
 			return Consoles.XBOXSERIESX;
 		}
-
 	}
-
 }

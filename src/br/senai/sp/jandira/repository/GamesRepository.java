@@ -19,7 +19,7 @@ public class GamesRepository {
 	public Jogo listarJogo(int posicao) {
 		return colecaoGames[posicao];
 	}
-	public Jogo[] listatTodosJogos() {
+	public Jogo[] listarTodosJogos() {
 		return colecaoGames;
 	}
 	public int getTamanho() {

@@ -8,9 +8,9 @@ public class FabricanteRepository {
 	
 	public FabricanteRepository() {
 		fabricantes = new Fabricante[3];
-		fabricantes[0] = new Fabricante("Activison", "28/02/2003", "Adam");
-		fabricantes[1] = new Fabricante("Warner Games", "28/02/2003", "Adam");
-		fabricantes[2] = new Fabricante("Ea Sports", "28/02/2003", "Adam");
+		fabricantes[0] = new Fabricante("Activison", "01/10/1979", "Larry Kaplan ");
+		fabricantes[1] = new Fabricante("Warner Games", "14/01/2004", "Jace Hall");
+		fabricantes[2] = new Fabricante("Ea Sports", "1991", "Electronic Arts");
 	}
 	public FabricanteRepository(int quantidadeFabricantes) {
 		fabricantes = new Fabricante[quantidadeFabricantes];
