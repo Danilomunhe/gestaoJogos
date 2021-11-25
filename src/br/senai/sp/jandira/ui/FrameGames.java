@@ -27,6 +27,8 @@ import java.util.Arrays;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import javax.swing.JButton;
 
@@ -43,7 +45,7 @@ public class FrameGames extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 825, 516);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.CYAN);
+		contentPane.setBackground(Color.YELLOW);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -65,7 +67,7 @@ public class FrameGames extends JFrame {
 		for (Fabricante f : fabricantes.listarTodosFabricantes()) {
 			modelFabricante.addElement(f.getNome());
 		}
-		
+
 		comboFabricante.setModel(modelFabricante);
 		comboFabricante.setBounds(87, 100, 148, 23);
 		contentPane.add(comboFabricante);
@@ -137,30 +139,31 @@ public class FrameGames extends JFrame {
 
 		JButton btnSalvar = new JButton("Salvar jogo");
 		btnSalvar.setFont(new Font("Tahoma", Font.BOLD, 12));
-		btnSalvar.setForeground(Color.WHITE);
-		btnSalvar.setBackground(Color.BLUE);
+		btnSalvar.setForeground(Color.DARK_GRAY);
+		btnSalvar.setBackground(Color.GREEN);
 		btnSalvar.setBounds(73, 377, 124, 40);
 		contentPane.add(btnSalvar);
 
 		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setForeground(Color.WHITE);
-		btnVoltar.setBackground(Color.BLUE);
+		btnVoltar.setForeground(Color.DARK_GRAY);
+		btnVoltar.setBackground(Color.RED);
 		btnVoltar.setBounds(324, 387, 89, 23);
+		btnVoltar.setEnabled(false);
 		contentPane.add(btnVoltar);
 
 		JButton btnAvancar = new JButton("Avan\u00E7ar");
-		btnAvancar.setForeground(Color.WHITE);
-		btnAvancar.setBackground(Color.BLUE);
+		btnAvancar.setForeground(Color.DARK_GRAY);
+		btnAvancar.setBackground(Color.RED);
 		btnAvancar.setBounds(429, 387, 89, 23);
+		btnAvancar.setEnabled(false);
 		contentPane.add(btnAvancar);
-		
+
 		JLabel lblControleDeJogos = new JLabel("Controle de jogos");
 		lblControleDeJogos.setFont(new Font("Tahoma", Font.BOLD, 22));
 		lblControleDeJogos.setBounds(293, 26, 207, 41);
 		contentPane.add(lblControleDeJogos);
 
 		setVisible(true);
-
 
 		GamesRepository colecaoJogos = new GamesRepository();
 
@@ -170,7 +173,7 @@ public class FrameGames extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				// Criando o objeto jogo e guardando no repositório
 				Jogo jogo = new Jogo();
-                
+
 				jogo.setTitulo(txtTitulo.getText());
 				jogo.setFabricante(fabricantes.listarFabricante(comboFabricante.getSelectedIndex()));
 				jogo.setZerado(checkBoxZerado.isSelected());
@@ -181,10 +184,19 @@ public class FrameGames extends JFrame {
 				colecaoJogos.gravarJogo(jogo, posicao);
 				posicao++;
 
-				System.out.println(jogo.getFabricante());
-
+				txtTitulo.setText("");
+				txtValor.setText("");
+				txtObservacoes.setText("");
+				checkBoxZerado.setSelected(false);
 				// Adiconando um elemento na lista
 				listJogos.addElement(jogo.getTitulo());
+
+				if (posicao == colecaoJogos.getTamanho()) {
+					btnSalvar.setEnabled(false);
+					btnSalvar.setBackground(Color.RED);
+					JOptionPane.showMessageDialog(null, "A coleção está cheia", "Cheia", JOptionPane.WARNING_MESSAGE);
+
+				}
 			}
 		});
 		list.addListSelectionListener(new ListSelectionListener() {
@@ -197,32 +209,36 @@ public class FrameGames extends JFrame {
 				txtObservacoes.setText(jogo.getObservacoes());
 				checkBoxZerado.setSelected(jogo.isZerado());
 				comboBoxConsoles.setSelectedIndex(jogo.getConsole().ordinal());
-				comboFabricante.setSelectedIndex(Arrays.asList(fabricantes.listarTodosFabricantes()).indexOf(jogo.getFabricante()));
+				comboFabricante.setSelectedIndex(
+				Arrays.asList(fabricantes.listarTodosFabricantes()).indexOf(jogo.getFabricante()));
+				
+				btnAvancar.setEnabled(true);
+				btnVoltar.setEnabled(true);
+				btnAvancar.setBackground(Color.GREEN);
+				btnVoltar.setBackground(Color.GREEN);
 			}
 		});
 
 		btnAvancar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int valorDaLista = list.getSelectedIndex();
 				list.setSelectedIndex(valorDaLista + 1);
-				
+
 			}
 		});
-		
+
 		btnVoltar.addActionListener(new ActionListener() {
-			
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				int valorDaLista = list.getSelectedIndex();
 				list.setSelectedIndex(valorDaLista - 1);
-				
+
 			}
 		});
 	}
-	
-	
 
 	private Consoles determinarConsole(int consoleSeleiconado) {
 		if (consoleSeleiconado == 0) {

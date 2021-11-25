@@ -22,5 +22,7 @@ public class GamesRepository {
 	public Jogo[] listatTodosJogos() {
 		return colecaoGames;
 	}
-	
+	public int getTamanho() {
+		return colecaoGames.length;
+	}
 }
