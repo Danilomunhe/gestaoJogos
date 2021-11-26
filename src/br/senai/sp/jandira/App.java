@@ -8,7 +8,7 @@ public class App {
 	public static void main(String[] args) {
 		
 		FrameGames frame = new FrameGames();
-
+        frame.setVisible(true);
 //	    Fabricante fabricante = new Fabricante();
 //	    fabricante.setNome("Activison");
 //	    Jogo jogos = new Jogo();

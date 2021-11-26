@@ -174,7 +174,6 @@ public class FrameGames extends JFrame {
 		btnLimpar.setBounds(147, 377, 124, 40);
 		contentPane.add(btnLimpar);
 
-		setVisible(true);
 
 		GamesRepository colecaoJogos = new GamesRepository();
 
